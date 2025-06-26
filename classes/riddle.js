@@ -1,6 +1,6 @@
 import readline from 'readline-sync';
 
-class Riddle {
+export class Riddle {
     constructor(id, name, taskDescription, correctAnswer) {
         this.id = id;
         this.name = name;
@@ -12,7 +12,7 @@ class Riddle {
         console.log(`Riddle ${this.id}: ${this.name}`);
         let answer;
         do {
-            answer = readline.question(`${this.taskDescription} `);
+            answer = readline.question(`${this.taskDescription} `).toLowerCase();
             if (answer !== this.correctAnswer) {
                 console.log("Wrong answer, please try again");
             }
