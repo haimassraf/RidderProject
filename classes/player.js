@@ -6,8 +6,8 @@ export class Player{
     RecordTime(start, end){
         const totalTimePerRiddle = (end - start) / 1000;
         this.times.push(totalTimePerRiddle);
-        return totalTimePerRiddle;
     }
+    
     ShowStatus(){
         const totalTime = this.times.reduce((acc, curr) => acc + curr, 0);
         const avgTime = totalTime / this.times.length;
