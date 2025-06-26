@@ -10,5 +10,6 @@ const imports = [r1, r2, r3, r4, r5, r6];
 export const allRiddles = [];
 
 for (const imp of imports) {
-    allRiddles.push(new Riddle(imp.id, imp.name, imp.taskDescription, imp.correctAnswer));
+    const newRiddle = new Riddle(imp.id, imp.name, imp.taskDescription, imp.correctAnswer);
+    allRiddles.push(newRiddle);
 }
