@@ -1,0 +1,22 @@
+import readline from 'readline-sync';
+
+class Riddle {
+    constructor(id, name, taskDescription, correctAnswer) {
+        this.id = id;
+        this.name = name;
+        this.taskDescription = taskDescription;
+        this.correctAnswer = correctAnswer;
+    }
+
+    ask() {
+        console.log(`Riddle ${this.id}: ${this.name}`);
+        let answer;
+        do {
+            answer = readline.question(`${this.taskDescription} `);
+            if (answer !== this.correctAnswer) {
+                console.log("Wrong answer, please try again");
+            }
+        } while (answer !== this.correctAnswer);
+        console.log('correct!');
+    }
+}
