@@ -46,10 +46,6 @@ riddle-game/
 ├── .gitignore # קבצים שלא ייכנסו ל־Git
 └── README.md # (קובץ זה)
 
-yaml
-Copy
-Edit
-
 ---
 
 ## 🚀 איך מריצים את המשחק
@@ -60,13 +56,9 @@ Edit
 הרצת המשחק:
 
 bash
-Copy
-Edit
 node app.js
 🧪 דוגמה לזרימת משחק
 markdown
-Copy
-Edit
 בחר רמת קושי: קל
 
 שאלה 1:
@@ -102,8 +94,6 @@ Edit
 פרויקט זה נוצר על ידי Haim Assraf © 2025
 כל הזכויות שמורות.
 
-yaml
-Copy
 Edit
 
 ---
