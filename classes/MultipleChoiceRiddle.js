@@ -5,10 +5,12 @@ export class MultipleChoiceRiddle extends Riddle {
     constructor(id, name, taskDescription, correctAnswer, difficulty, choices, hint = "", timeLimit = 5) {
         super(id, name, taskDescription, correctAnswer, difficulty, hint, timeLimit);
         this.choices = choices;
+        this.start = null;
+        this.end = null;
     }
     ask() {
         console.log(`Riddle ${this.id}: ${this.name}`);
-
+        this.start = new Date();
         let answer;
         do {
             console.log(this.taskDescription);
@@ -22,5 +24,10 @@ export class MultipleChoiceRiddle extends Riddle {
             }
         } while (answer !== this.correctAnswer);
         console.log('correct!');
+        this.end = new Date()
+        if (this.end - this.start > this.timeLimit) {
+            console.log("Too slow! 5 seconds penalty applied.");
+            this.start -= 5000;
+        }
     }
 }

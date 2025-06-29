@@ -15,6 +15,7 @@ export class Riddle {
 
     ask() {
         console.log(`Riddle ${this.id}: ${this.name}`);
+        this.start = new Date();
         let answer;
         do {
             answer = readline.question(`${this.taskDescription} (You can enter 'hint' but its coust 10 secounds): `).toLowerCase();
@@ -32,7 +33,8 @@ export class Riddle {
             }
         } while (answer !== this.correctAnswer);
         console.log('correct!');
-        if (this.ene - this.start > this.timeLimit) {
+        this.end = new Date();
+        if (this.end - this.start > this.timeLimit) {
             console.log("Too slow! 5 seconds penalty applied.");
             this.start -= 5000;
         }
