@@ -1,4 +1,4 @@
-import { allRiddles } from "./riddles/allRiddles.js";
+import { getRiddlesByLevel } from "./riddles/allRiddles.js";
 import { Player } from "./classes/player.js";
 import readline from 'readline-sync';
 
@@ -6,14 +6,30 @@ function main() {
     console.log('=== Welcome to Riddle Project! ===');
     const playerName = readline.question("Enter you name: ");
     const player = new Player(playerName);
+    const level = chooseLevel();
+    const allRiddles = getRiddlesByLevel(level);
     for (const riddle of allRiddles) {
-        let start = new Date();
+        const start = new Date();
         riddle.ask();
-        let end = new Date();
+        const end = new Date();
         player.RecordTime(start, end);
     }
-
-    player.ShowStatus()
+    player.ShowStatus();
 }
 
 main();
+
+function chooseLevel() {
+    let level;
+    do {
+        level = readline.question("Choose difficulty: easy / medium / hard: ").toLocaleLowerCase();
+        if (!validLevel(level)) {
+            console.log("Invalid options, plese enter one of the options: ");
+        }
+    } while (!validLevel(level));
+    return level;
+}
+
+function validLevel(input) {
+    return input === "easy" || input === "medium" || input === "hard";
+}

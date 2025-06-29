@@ -1,22 +1,31 @@
 import { Riddle } from '../classes/riddle.js';
 import { MultipleChoiceRiddle } from '../classes/MultipleChoiceRiddle.js';
 import { r1 } from './r1.js';
-import { r2 } from './r2.js';
-import { r3 } from './r3.js';
-import { r4 } from './r4.js';
-import { r5 } from './r5.js';
-import { r6 } from './r6.js';
-import { r7 } from './r7.js';
+// import { r2 } from './r2.js';
+// import { r3 } from './r3.js';
+// import { r4 } from './r4.js';
+// import { r5 } from './r5.js';
+// import { r6 } from './r6.js';
+// import { r7 } from './r7.js';
+// import { r8 } from './r8.js';
 
-const imports = [r1, r2, r3, r4, r5, r6, r7];
-export const allRiddles = [];
+// const imports = [r1, r2, r3, r4, r5, r6, r7, r8];
+const imports = [r1];
 
-for (const imp of imports) {
-    if ('choices' in imp) {
-         var newRiddle = new MultipleChoiceRiddle(imp.id, imp.name, imp.taskDescription, imp.correctAnswer, imp.choices);
+export function getRiddlesByLevel(level) {
+    const allRiddles = [];
+    const userImports = imports.filter((imp) => imp.difficulty === level);
+    let id = 1;
+    for (const riddle of userImports) {
+        if ('choices' in riddle) {
+            const newRiddle = new MultipleChoiceRiddle(id, riddle.name, riddle.taskDescription, riddle.correctAnswer, riddle.difficulty ,riddle.choices);
+            allRiddles.push(newRiddle);
+        }
+        else {
+            const newRiddle = new Riddle(id, riddle.name, riddle.taskDescription, riddle.correctAnswer, riddle.difficulty);
+            allRiddles.push(newRiddle);
+        }
+        id++;
     }
-    else {
-        var newRiddle = new Riddle(imp.id, imp.name, imp.taskDescription, imp.correctAnswer);
-    }
-    allRiddles.push(newRiddle);
+    return allRiddles;
 }
