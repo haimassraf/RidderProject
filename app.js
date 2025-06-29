@@ -9,11 +9,12 @@ function main() {
     const level = chooseLevel();
     const allRiddles = getRiddlesByLevel(level);
     for (const riddle of allRiddles) {
-        const start = new Date();
+        riddle.start = new Date();
         riddle.ask();
-        const end = new Date();
-        player.RecordTime(start, end);
+        riddle.end = new Date();
+        player.RecordTime(riddle.start, riddle.end);
     }
+    console.log(player.times);
     player.ShowStatus();
 }
 

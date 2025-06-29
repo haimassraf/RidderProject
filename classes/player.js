@@ -4,8 +4,8 @@ export class Player{
         this.times = [];
     }
     RecordTime(start, end){
-        const totalTimePerRiddle = (end - start) / 1000;
-        this.times.push(totalTimePerRiddle);
+        const time = (end - start) / 1000;
+        this.times.push(time);
     }
     
     ShowStatus(){
