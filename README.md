@@ -92,4 +92,3 @@ markdown
 📝 רישיון
 פרויקט זה נוצר על ידי Haim Assraf © 2025
 כל הזכויות שמורות.
-

@@ -2,6 +2,7 @@ import { getRiddlesByLevel } from "./riddles/allRiddles.js";
 import { Player } from "./classes/player.js";
 import readline from 'readline-sync';
 
+
 function main() {
     console.log('=== Welcome to Riddle Project! ===');
     const playerName = readline.question("Enter you name: ");
@@ -12,7 +13,6 @@ function main() {
         riddle.ask();
         player.RecordTime(riddle.start, riddle.end);
     }
-    console.log(player.times);
     player.ShowStatus();
 }
 

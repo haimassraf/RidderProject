@@ -17,11 +17,11 @@ export function getRiddlesByLevel(level) {
     let id = 1;
     for (const riddle of userImports) {
         if ('choices' in riddle) {
-            const newRiddle = new MultipleChoiceRiddle(id, riddle.name, riddle.taskDescription, riddle.correctAnswer, riddle.difficulty, riddle.choices, riddle.hint);
+            const newRiddle = new MultipleChoiceRiddle(id, riddle.name, riddle.taskDescription, riddle.correctAnswer, riddle.difficulty, riddle.choices, riddle.hint, riddle.timeLimit);
             allRiddles.push(newRiddle);
         }
         else {
-            const newRiddle = new Riddle(id, riddle.name, riddle.taskDescription, riddle.correctAnswer, riddle.difficulty, riddle.hint);
+            const newRiddle = new Riddle(id, riddle.name, riddle.taskDescription, riddle.correctAnswer, riddle.difficulty, riddle.hint, riddle.timeLimit);
             allRiddles.push(newRiddle);
         }
         id++;

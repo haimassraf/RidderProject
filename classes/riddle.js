@@ -1,7 +1,7 @@
 import readline from 'readline-sync';
 
 export class Riddle {
-    constructor(id, name, taskDescription, correctAnswer, difficulty, hint = "", timeLimit = 5) {
+    constructor(id, name, taskDescription, correctAnswer, difficulty, hint = "", timeLimit = 7) {
         this.id = id;
         this.name = name;
         this.taskDescription = taskDescription;
@@ -14,7 +14,7 @@ export class Riddle {
     }
 
     ask() {
-        console.log(`Riddle ${this.id}: ${this.name}`);
+        console.log(`\nRiddle ${this.id}: ${this.name}`);
         this.start = Date.now();
         let isHint = false;
         let answer;
@@ -43,8 +43,8 @@ export class Riddle {
             }
         } while (answer !== this.correctAnswer);
 
-        console.log('correct!');
         this.end = Date.now();
+        console.log('correct!');
 
         if (!isHint && (this.end - this.start) / 1000 > this.timeLimit) {
             console.log("Too slow! 5 seconds penalty applied.");

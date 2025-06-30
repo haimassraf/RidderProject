@@ -13,7 +13,7 @@ export class Player{
         const avgTime = totalTime / this.times.length;
 
         console.log(`${this.name}\`s record:`);
-        console.log(`Total time: ${totalTime} secound`);
-        console.log(`AVG per riddle ${avgTime} secound`);
+        console.log(`\tTotal time: ${totalTime.toFixed(2)} secound`);
+        console.log(`\tAVG per riddle ${avgTime.toFixed(2)} secound`);
     }
 }

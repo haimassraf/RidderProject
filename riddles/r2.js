@@ -3,5 +3,5 @@ export const r2 = {
     name: "Simple Subtraction",
     taskDescription: "What is 10 - 4?",
     correctAnswer: "6",
-    difficulty: "easy"
+    difficulty: "easy",
 };
