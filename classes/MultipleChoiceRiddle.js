@@ -10,7 +10,7 @@ export class MultipleChoiceRiddle extends Riddle {
     }
     ask() {
         console.log(`Riddle ${this.id}: ${this.name}`);
-        this.start = new Date();
+        this.start = Date.now();
         let answer;
         do {
             console.log(this.taskDescription);
@@ -24,8 +24,8 @@ export class MultipleChoiceRiddle extends Riddle {
             }
         } while (answer !== this.correctAnswer);
         console.log('correct!');
-        this.end = new Date()
-        if (this.end - this.start > this.timeLimit) {
+        this.end = Date.now();
+        if ((this.end - this.start) / 1000 > this.timeLimit) {
             console.log("Too slow! 5 seconds penalty applied.");
             this.start -= 5000;
         }
