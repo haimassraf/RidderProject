@@ -1,9 +1,8 @@
 import { promises as fs } from 'node:fs';
-import { Riddle } from '../classes/riddle.js';
-import { MultipleChoiceRiddle } from '../classes/MultipleChoiceRiddle.js';
-import { log } from 'node:console';
+import { Riddle } from '../../classes/riddle.js';
+import { MultipleChoiceRiddle } from '../../classes/MultipleChoiceRiddle.js';
 
-const riddlesJson = "C:\\Users\\Studies\\kodcode\\kodCodeIdf\\RidderProject\\CRUD\\riddles.json";
+const riddlesJson = "C:\\Users\\Studies\\kodcode\\kodCodeIdf\\RidderProject\\service\\riddelService\\riddles.json";
 
 export async function create(newData) {
     try {

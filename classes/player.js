@@ -1,14 +1,16 @@
-export class Player{
-    constructor(name){
+import { createPlayer } from "../service/playerService/controller.js";
+
+export class Player {
+    constructor(name) {
         this.name = name;
         this.times = [];
     }
-    RecordTime(start, end){
+    RecordTime(start, end) {
         const time = (end - start) / 1000;
         this.times.push(time);
     }
-    
-    ShowStatus(){
+
+    ShowStatus() {
         const totalTime = this.times.reduce((acc, curr) => acc + curr, 0);
         const avgTime = totalTime / this.times.length;
 
