@@ -1,8 +1,16 @@
 import { promises as fs } from 'node:fs';
+import { Riddle } from '../classes/riddle.js';
+import { MultipleChoiceRiddle } from '../classes/MultipleChoiceRiddle.js';
+import { log } from 'node:console';
+
+const riddlesJson = "C:\\Users\\Studies\\kodcode\\kodCodeIdf\\RidderProject\\CRUD\\riddles.json";
 
 export async function create(newData) {
     try {
-        const file = await fs.readFile("riddles.json", "utf8");
+        if (!newData.name || !newData.taskDescription || !newData.correctAnswer || !newData.difficulty) {
+            throw new Error("new object has missing keys")
+        }
+        const file = await fs.readFile(riddlesJson, "utf8");
         const data = JSON.parse(file);
 
         if (data.length === 0) {
@@ -13,16 +21,16 @@ export async function create(newData) {
             newData["id"] = highestId + 1;
         }
         data.push(newData);
-        await fs.writeFile("riddles.json", JSON.stringify(data));
+        await fs.writeFile(riddlesJson, JSON.stringify(data));
         console.log(`new data: ${newData}\ninsert succesfully.`);
     } catch (err) {
-        console.log("Error:", err);
+        console.log("Error:", err.message);
     }
 }
 
 export async function read() {
     try {
-        const file = await fs.readFile("riddles.json", "utf8");
+        const file = await fs.readFile(riddlesJson, "utf8");
         const data = JSON.parse(file);
         console.log("All data:");
         console.log(data);
@@ -33,10 +41,33 @@ export async function read() {
 
 export async function getAllObjects() {
     try {
-        const file = await fs.readFile("riddles.json", "utf8");
+        const file = await fs.readFile(riddlesJson, "utf8");
         return JSON.parse(file);
     } catch (err) {
         console.log("Error: ", err);
+    }
+}
+
+export async function getRiddlesByLevel(level) {
+    try {
+        const data = await getAllObjects();
+        const allDataByLevel = data.filter((riddle) => riddle.difficulty === level);
+        const allRiddlesByLevel = [];
+        let id = 1;
+        for (const dataByLevel of allDataByLevel) {
+            if (dataByLevel.choices) {
+                const newRiddle = new MultipleChoiceRiddle(id, dataByLevel.name, dataByLevel.taskDescription, dataByLevel.correctAnswer, dataByLevel.difficulty, dataByLevel.choices, dataByLevel.hint, dataByLevel.timeLimit);
+                allRiddlesByLevel.push(newRiddle);
+            }
+            else {
+                const newRiddle = new Riddle(id, dataByLevel.name, dataByLevel.taskDescription, dataByLevel.correctAnswer, dataByLevel.difficulty, dataByLevel.hint, dataByLevel.timeLimit);
+                allRiddlesByLevel.push(newRiddle);
+            }
+            id++;
+        }
+        return allRiddlesByLevel;
+    } catch (err) {
+        console.log("Error: ", err.message)
     }
 }
 
@@ -57,7 +88,7 @@ export async function updateById(id, newData) {
         data[i].hint = newData.hint ? newData.hint : data[i].hint;
         data[i].timeLimit = newData.timeLimit ? newData.timeLimit : data[i].timeLimit;
 
-        await fs.writeFile("riddles.json", JSON.stringify(data));
+        await fs.writeFile(riddlesJson, JSON.stringify(data));
         console.log(`Object with id ${id} updated successfully.`);
     } catch (err) {
         console.log("Error: ", err);
@@ -74,7 +105,7 @@ export async function deleteById(id) {
         }
 
         data.splice(i, 1);
-        await fs.writeFile("riddles.json", JSON.stringify(data));
+        await fs.writeFile(riddlesJson, JSON.stringify(data));
         console.log(`Object with id ${id} removed successfully.`);
     } catch (err) {
         console.log("Error: ", err.message);

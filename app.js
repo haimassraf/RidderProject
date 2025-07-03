@@ -1,14 +1,14 @@
-import { getRiddlesByLevel } from "./riddles/allRiddles.js";
 import { Player } from "./classes/player.js";
 import readline from 'readline-sync';
+import * as cnt from './CRUD/controller.js'
 
 
-function main() {
+async function main() {
     console.log('=== Welcome to Riddle Project! ===');
     const playerName = readline.question("Enter you name: ");
     const player = new Player(playerName);
     const level = chooseLevel();
-    const allRiddles = getRiddlesByLevel(level);
+    const allRiddles = await cnt.getRiddlesByLevel(level);
     for (const riddle of allRiddles) {
         riddle.ask();
         player.RecordTime(riddle.start, riddle.end);
