@@ -5,9 +5,11 @@ import { readAllRiddles } from "./functions/riddlesFunction/readAllRiddles.js";
 import { updateRiddle } from './functions/riddlesFunction/updateRiddle.js';
 import { deleteRiddle } from './functions/riddlesFunction/deleteRiddle.js';
 import { viewLeaderBoard } from './functions/playerFunction/viewLeaderBoard.js';
+import fetch from 'node-fetch'
 
 async function main() {
     console.log('=== Welcome to Riddle Project! ===');
+
     // let ifExit = false;
     // while (!ifExit) {
     menu();
