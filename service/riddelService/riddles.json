@@ -72,5 +72,35 @@
             "14",
             "12"
         ]
+    },
+    {
+        "name": "Easy Math",
+        "taskDescription": "33 - 18 ?",
+        "correctAnswer": "2",
+        "difficulty": "medium",
+        "hint": "lower than 20",
+        "choices": [
+            "20",
+            "15",
+            "17",
+            "14"
+        ],
+        "id": 9
+    },
+    {
+        "name": "dfd",
+        "taskDescription": "dfdsf",
+        "correctAnswer": "f",
+        "difficulty": "easy",
+        "hint": "",
+        "id": 10
+    },
+    {
+        "name": "Easy Math",
+        "taskDescription": "27 + 6 / 2 ?",
+        "correctAnswer": "30",
+        "difficulty": "hard",
+        "hint": "",
+        "id": 11
     }
 ]

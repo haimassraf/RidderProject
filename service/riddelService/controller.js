@@ -4,7 +4,7 @@ import { MultipleChoiceRiddle } from '../../classes/MultipleChoiceRiddle.js';
 
 const riddlesJson = "C:\\Users\\Studies\\kodcode\\kodCodeIdf\\RidderProject\\service\\riddelService\\riddles.json";
 
-export async function create(newData) {
+export async function createRiddle(newData) {
     try {
         if (!newData.name || !newData.taskDescription || !newData.correctAnswer || !newData.difficulty) {
             throw new Error("new object has missing keys")
@@ -21,7 +21,7 @@ export async function create(newData) {
         }
         data.push(newData);
         await fs.writeFile(riddlesJson, JSON.stringify(data));
-        console.log(`new data: ${newData}\ninsert succesfully.`);
+        console.log(`new data: ${newData.name}\ninsert succesfully.`);
     } catch (err) {
         console.log("Error:", err.message);
     }
