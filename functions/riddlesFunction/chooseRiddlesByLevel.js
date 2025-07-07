@@ -1,4 +1,4 @@
-import { getRiddlesByLevel } from "../../DAL/riddleController.js";
+import { getRiddlesByLevel } from "../../../server/controllers/riddleController.js";
 import readline from 'readline-sync';
 
 export async function chooseRiddlesByLevel(){

@@ -1,4 +1,4 @@
-import { deleteById } from "../../DAL/riddleController.js";
+import { deleteById } from "../../../server/controllers/riddleController.js";
 import readline from 'readline-sync';
 
 export function deleteRiddle() {

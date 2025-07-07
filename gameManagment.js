@@ -1,6 +1,6 @@
 import { Player } from "./models/player.js";
 import readline from 'readline-sync';
-import { chooseRiddlesByLevel } from "./services/riddlesServices/chooseRiddlesByLevel.js";
+import { chooseRiddlesByLevel } from "./functions/riddlesFunction/chooseRiddlesByLevel.js";
 
 
 export async function startGame() {

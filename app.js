@@ -1,12 +1,12 @@
 import readline from 'readline-sync';
 import { startGame } from './gameManagment.js';
-import { createNewRiddle } from "./services/riddlesServices/createNewRiddle.js";
-import { readAllRiddles } from "./services/riddlesServices/readAllRiddles.js";
-import { updateRiddle } from './services/riddlesServices/updateRiddle.js';
-import { deleteRiddle } from './services/riddlesServices/deleteRiddle.js';
-import { viewLeaderBoard } from './services/playerServices/viewLeaderBoard.js';
+import { createNewRiddle } from "./functions/riddlesFunction/createNewRiddle.js";
+import { readAllRiddles } from "./functions/riddlesFunction/readAllRiddles.js";
+import { updateRiddle } from './functions/riddlesFunction/updateRiddle.js';
+import { deleteRiddle } from './functions/riddlesFunction/deleteRiddle.js';
+import { viewLeaderBoard } from './functions/playerFunction/viewLeaderBoard.js';
 
-function main() {
+async function main() {
     console.log('=== Welcome to Riddle Project! ===');
     // let ifExit = false;
     // while (!ifExit) {
@@ -14,7 +14,7 @@ function main() {
     const userChoice = readline.question();
     switch (userChoice) {
         case "1":
-            startGame();
+            await startGame();
             break;
         case "2":
             createNewRiddle();
