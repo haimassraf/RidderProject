@@ -1,5 +1,5 @@
 import readline from 'readline-sync';
-import { createRiddle } from '../DAL/riddleController.js';
+import { createRiddle } from '../../DAL/riddleController.js';
 
 export function createNewRiddle() {
     const newRiddle = {

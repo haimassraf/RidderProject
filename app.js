@@ -1,9 +1,10 @@
 import readline from 'readline-sync';
 import { startGame } from './gameManagment.js';
-import { createNewRiddle } from "./services/createNewRiddle.js";
-import { readAllRiddles } from "./services/readAllRiddles.js";
-import { updateRiddle } from './services/updateRiddle.js';
-import { deleteRiddle } from './services/deleteRiddle.js';
+import { createNewRiddle } from "./services/riddlesServices/createNewRiddle.js";
+import { readAllRiddles } from "./services/riddlesServices/readAllRiddles.js";
+import { updateRiddle } from './services/riddlesServices/updateRiddle.js';
+import { deleteRiddle } from './services/riddlesServices/deleteRiddle.js';
+import { viewLeaderBoard } from './services/playerServices/viewLeaderBoard.js';
 
 function main() {
     console.log('=== Welcome to Riddle Project! ===');

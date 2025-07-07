@@ -1,5 +1,5 @@
 import readline from 'readline-sync';
-import { updateById } from '../DAL/riddleController.js';
+import { updateById } from '../../DAL/riddleController.js';
 
 export function updateRiddle() {
 
