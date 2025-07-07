@@ -1,6 +1,6 @@
 import { promises as fs } from 'node:fs';
-import { Riddle } from '../../classes/riddle.js';
-import { MultipleChoiceRiddle } from '../../classes/MultipleChoiceRiddle.js';
+import { Riddle } from '../models/riddle.js';
+import { MultipleChoiceRiddle } from '../models/MultipleChoiceRiddle.js';
 
 const riddlesJson = "C:\\Users\\Studies\\kodcode\\kodCodeIdf\\RidderProject\\service\\riddelService\\riddles.json";
 

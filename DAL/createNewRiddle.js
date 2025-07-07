@@ -1,5 +1,5 @@
 import readline from 'readline-sync';
-import { createRiddle } from './service/riddelService/controller.js';
+import { createRiddle } from '../service/riddleController.js';
 
 export function createNewRiddle() {
     const newRiddle = {

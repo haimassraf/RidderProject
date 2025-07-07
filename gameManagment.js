@@ -1,7 +1,7 @@
-import { Player } from "./classes/player.js";
+import { Player } from "./models/player.js";
 import readline from 'readline-sync';
-import * as riddleService from './service/riddelService/controller.js'
-import { createNewRiddle } from "./createNewRiddle.js";
+import * as riddleService from './service/riddleController.js'
+import { createNewRiddle } from "./DAL/createNewRiddle.js";
 
 
 export function main() {

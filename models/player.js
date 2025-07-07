@@ -1,4 +1,4 @@
-import { createPlayer } from "../service/playerService/controller.js";
+import { createPlayer } from "../service/playerController.js";
 
 export class Player {
     constructor(name) {
