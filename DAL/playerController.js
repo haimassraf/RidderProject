@@ -1,13 +1,13 @@
 import { promises as fs } from 'node:fs';
 
-const playersJson = "C:\\Users\\Studies\\kodcode\\kodCodeIdf\\RidderProject\\services\\playerService\\players.json";
+const playersJsonPath = "C:\\Users\\Studies\\kodcode\\kodCodeIdf\\RidderProject\\DB\\players.json";
 
 export async function createPlayer(newPlayer) {
     try {
         if (!newPlayer.name) {
             throw new Error("new player has no name")
         }
-        const file = await fs.readFile(playersJson, "utf8");
+        const file = await fs.readFile(playersJsonPath, "utf8");
         const data = JSON.parse(file);
         const existsName = data.some(obj => obj.name === newPlayer.name);
         if (existsName) {
@@ -21,7 +21,7 @@ export async function createPlayer(newPlayer) {
             newPlayer["id"] = highestId + 1;
         }
         data.push(newPlayer);
-        await fs.writeFile(playersJson, JSON.stringify(data));
+        await fs.writeFile(playersJsonPath, JSON.stringify(data));
         console.log(`new player: ${newPlayer.name}\ninsert succesfully.`);
     } catch (err) {
         console.log("Error:", err.message);
@@ -30,7 +30,7 @@ export async function createPlayer(newPlayer) {
 
 export async function read() {
     try {
-        const file = await fs.readFile(playersJson, "utf8");
+        const file = await fs.readFile(playersJsonPath, "utf8");
         const data = JSON.parse(file);
         console.log("All players:");
         console.log(data);
@@ -41,7 +41,7 @@ export async function read() {
 
 export async function getAllPlayers() {
     try {
-        const file = await fs.readFile(playersJson, "utf8");
+        const file = await fs.readFile(playersJsonPath, "utf8");
         return JSON.parse(file);
     } catch (err) {
         console.log("Error: ", err.message);
@@ -64,7 +64,7 @@ export async function updateById(id, updatedPlayer) {
         data[i].name = updatedPlayer.name ? updatedPlayer.name : data[i].name;
         data[i].highestScore = updatedPlayer.highestScore ? updatedPlayer.highestScore : data[i].highestScore;
 
-        await fs.writeFile(playersJson, JSON.stringify(data));
+        await fs.writeFile(playersJsonPath, JSON.stringify(data));
         console.log(`Player with id ${id} updated successfully.`);
     } catch (err) {
         console.log("Error: ", err.message);
@@ -81,7 +81,7 @@ export async function deleteById(id) {
         }
 
         data.splice(i, 1);
-        await fs.writeFile(playersJson, JSON.stringify(data));
+        await fs.writeFile(playersJsonPath, JSON.stringify(data));
         console.log(`Player with id ${id} removed successfully.`);
     } catch (err) {
         console.log("Error: ", err.message);

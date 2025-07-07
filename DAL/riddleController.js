@@ -2,14 +2,14 @@ import { promises as fs } from 'node:fs';
 import { Riddle } from '../models/riddle.js';
 import { MultipleChoiceRiddle } from '../models/MultipleChoiceRiddle.js';
 
-const riddlesJson = "C:\\Users\\Studies\\kodcode\\kodCodeIdf\\RidderProject\\service\\riddelService\\riddles.json";
+const riddlesJsonPath = "C:\\Users\\Studies\\kodcode\\kodCodeIdf\\RidderProject\\DB\\riddles.json";
 
 export async function createRiddle(newData) {
     try {
         if (!newData.name || !newData.taskDescription || !newData.correctAnswer || !newData.difficulty) {
             throw new Error("new object has missing keys")
         }
-        const file = await fs.readFile(riddlesJson, "utf8");
+        const file = await fs.readFile(riddlesJsonPath, "utf8");
         const data = JSON.parse(file);
 
         if (data.length === 0) {
@@ -20,7 +20,7 @@ export async function createRiddle(newData) {
             newData["id"] = highestId + 1;
         }
         data.push(newData);
-        await fs.writeFile(riddlesJson, JSON.stringify(data));
+        await fs.writeFile(riddlesJsonPath, JSON.stringify(data));
         console.log(`new data: ${newData.name}\ninsert succesfully.`);
     } catch (err) {
         console.log("Error:", err.message);
@@ -29,7 +29,7 @@ export async function createRiddle(newData) {
 
 export async function read() {
     try {
-        const file = await fs.readFile(riddlesJson, "utf8");
+        const file = await fs.readFile(riddlesJsonPath, "utf8");
         const data = JSON.parse(file);
         console.log("All data:");
         console.log(data);
@@ -40,7 +40,7 @@ export async function read() {
 
 export async function getAllObjects() {
     try {
-        const file = await fs.readFile(riddlesJson, "utf8");
+        const file = await fs.readFile(riddlesJsonPath, "utf8");
         return JSON.parse(file);
     } catch (err) {
         console.log("Error: ", err);
@@ -87,7 +87,7 @@ export async function updateById(id, newData) {
         data[i].hint = newData.hint ? newData.hint : data[i].hint;
         data[i].timeLimit = newData.timeLimit ? newData.timeLimit : data[i].timeLimit;
 
-        await fs.writeFile(riddlesJson, JSON.stringify(data));
+        await fs.writeFile(riddlesJsonPath, JSON.stringify(data));
         console.log(`Object with id ${id} updated successfully.`);
     } catch (err) {
         console.log("Error: ", err);
@@ -104,7 +104,7 @@ export async function deleteById(id) {
         }
 
         data.splice(i, 1);
-        await fs.writeFile(riddlesJson, JSON.stringify(data));
+        await fs.writeFile(riddlesJsonPath, JSON.stringify(data));
         console.log(`Object with id ${id} removed successfully.`);
     } catch (err) {
         console.log("Error: ", err.message);

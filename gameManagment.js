@@ -1,7 +1,8 @@
 import { Player } from "./models/player.js";
 import readline from 'readline-sync';
 import * as riddleService from './service/riddleController.js'
-import { createNewRiddle } from "./DAL/createNewRiddle.js";
+import { createNewRiddle } from "./services/createNewRiddle.js";
+import { readAllRiddles } from "./services/readAllRiddles.js";
 
 
 export function main() {
@@ -25,7 +26,7 @@ export function main() {
             deleteRiddle();
             break;
         case "6":
-            viewLeaderboard();
+            viewLeaderBoard();
             break;
         default:
             console.log("Invalid choice");
