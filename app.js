@@ -1,8 +1,9 @@
 import readline from 'readline-sync';
 import { startGame } from './gameManagment.js';
-import { createNewRiddle, insertRiddle } from "./services/createNewRiddle.js";
+import { createNewRiddle } from "./services/createNewRiddle.js";
 import { readAllRiddles } from "./services/readAllRiddles.js";
 import { updateRiddle } from './services/updateRiddle.js';
+import { deleteRiddle } from './services/deleteRiddle.js';
 
 function main() {
     console.log('=== Welcome to Riddle Project! ===');
@@ -15,8 +16,7 @@ function main() {
             startGame();
             break;
         case "2":
-            const newRiddle = createNewRiddle();
-            insertRiddle(newRiddle);
+            createNewRiddle();
             break;
         case "3":
             readAllRiddles();

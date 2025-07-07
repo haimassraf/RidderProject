@@ -1,34 +1,99 @@
-import { createNewRiddle } from "./createNewRiddle.js";
 import readline from 'readline-sync';
+import { updateById } from '../DAL/riddleController.js';
 
 export function updateRiddle() {
+
+    let idForUpdate;
+    let userChoice;
+    do {
+        userChoice = readline.question("Enter the object id for update: ")
+        idForUpdate = parseInt(userChoice);
+        if (isNaN(idForUpdate)) { console.log("The id is number") };
+    } while (isNaN(idForUpdate));
+
     const updatedRiddle = {};
-    updatedRiddle.name = readline.question("Name (or enter if not): ");
-    updatedRiddle.taskDescription = readline.question("Task description (or enter if not): ");
-    const isMultiple = readline.question("Multiple choices? (y) ").toLowerCase();
-    if (isMultiple === 'y') {
+
+    const updateName = readline.question("Update name? (y): ").toLowerCase();
+    if (updateName === 'y') {
+        updatedRiddle.name = requiredQuestion("New name: ");
+    }
+
+    const updateTask = readline.question("Update task description? (y): ").toLowerCase();
+    if (updateTask === 'y') {
+        updatedRiddle.taskDescription = requiredQuestion("New task description: ");
+    }
+
+    const updateMultiple = readline.question("Update or insert multiple choices? (y): ").toLowerCase();
+    if (updateMultiple === 'y') {
         updatedRiddle.choices = addMultipleAnswer();
-        const validNumbers = ["1", "2", "3", "4"];
-        do {
-            const correctAnswer = readline.question("correct answer (1-4): ");
-            if (!validNumbers.includes(correctAnswer)) {
-                console.log("You must enter a number between 1 to 4");
-            }
-        } while (!validNumbers.includes(correctAnswer))
+        updatedRiddle.correctAnswer = requiredQuestion("New correct answer (1-4): ", false, true);
     }
     else {
-        updatedRiddle.correctAnswer = readline.question("correct Answer: ")
+        const updateCorrectAnswer = readline.question("Update correct answer? (y) ").toLowerCase();
+        if (updateCorrectAnswer == "y") {
+            updatedRiddle.correctAnswer = requiredQuestion("New correct answer: ");
+        }
     }
-    updatedRiddle.difficulty = readline.question("difficulty (easy, medium, hard): ");
-    updatedRiddle.hint = readline.question("Hint (or enter if not): ");
-    updatedRiddle.timeLimit = readline.question("Time Limit: ");
-    return newRiddle;
+
+    const updateDifficulty = readline.question("Update difficulty? (y): ").toLowerCase();
+    if (updateDifficulty === 'y') {
+        updatedRiddle.difficulty = requiredQuestion("New difficulty (easy, medium, hard): ", true);
+    }
+
+    const updateHint = readline.question("Update hint? (y): ").toLowerCase();
+    if (updateHint === 'y') {
+        updatedRiddle.hint = readline.question("New hint: ");
+    }
+
+    const updateTime = readline.question("Update time limit? (y): ").toLowerCase();
+    if (updateTime === 'y') {
+        updatedRiddle.timeLimit = requiredQuestion("New time limit (1 - 60): ", false, false, true);
+    }
+
+    updateById(idForUpdate, updatedRiddle);
+}
+
+function requiredQuestion(question, isDifficulty = false, isMultiple = false, timeLimit = false) {
+    let res;
+    do {
+        res = readline.question(`\n${question}`);
+
+        if (!isDifficulty && !isMultiple && !timeLimit) {
+            if (!res) {
+                console.log("You must enter this line");
+            }
+        } else if (isDifficulty) {
+            const levels = ["easy", "medium", "hard"];
+            if (!levels.includes(res.toLowerCase())) {
+                console.log("Difficulty must be one of: easy, medium, hard");
+                res = "";
+            }
+        }
+        else if (isMultiple) {
+            const num = parseInt(res);
+            if (isNaN(num) || num < 1 || num > 4) {
+                console.log("Answer must be a number between 1 to 4.");
+                res = "";
+            }
+        }
+        else if (timeLimit) {
+            const num = parseInt(res);
+            if (isNaN(num) || num < 1 || num > 60) {
+                console.log("You must enter a positive number that lower than 60");
+                res = "";
+            }
+            else {
+                res = num;
+            }
+        }
+    } while (!res)
+    return res;
 }
 
 function addMultipleAnswer() {
     const answers = [];
     for (let i = 0; i < 4; i++) {
-        const answer = readline.question(`Enter ${i + 1} answer: `);
+        const answer = requiredQuestion(`Enter ${i + 1} answer: `);
         answers.push(answer);
     }
     return answers;
