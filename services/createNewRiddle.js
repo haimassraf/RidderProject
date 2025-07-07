@@ -21,7 +21,11 @@ export function createNewRiddle() {
     if (isTimeLimit === 'y') {
         newRiddle.timeLimit = requiredQuestion("Time Limit: ", false, false, true);
     }
-    createRiddle(newRiddle)
+    return newRiddle;
+}
+
+export function insertRiddle(newRiddle){
+    createRiddle(newRiddle);
 }
 
 function requiredQuestion(question, isDifficulty = false, isMultiple = false, timeLimit = false) {
