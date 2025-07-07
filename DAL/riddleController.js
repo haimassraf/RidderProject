@@ -31,7 +31,7 @@ export async function read() {
     try {
         const file = await fs.readFile(riddlesJsonPath, "utf8");
         const data = JSON.parse(file);
-        console.log("All data:");
+        console.log("All Riddles:");
         console.log(data);
     } catch (err) {
         console.log("Error:", err);

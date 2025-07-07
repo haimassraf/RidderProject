@@ -88,19 +88,26 @@
         "id": 9
     },
     {
-        "name": "dfd",
-        "taskDescription": "dfdsf",
-        "correctAnswer": "f",
-        "difficulty": "easy",
-        "hint": "",
-        "id": 10
-    },
-    {
         "name": "Easy Math",
         "taskDescription": "27 + 6 / 2 ?",
         "correctAnswer": "30",
         "difficulty": "hard",
         "hint": "",
         "id": 11
+    },
+    {
+        "name": "Basic Multiplay",
+        "taskDescription": "3 X 2 ?",
+        "choices": [
+            "6",
+            "4",
+            "5",
+            "3"
+        ],
+        "correctAnswer": "1",
+        "difficulty": "easy",
+        "hint": "3 + 3",
+        "timeLimit": 4,
+        "id": 12
     }
 ]

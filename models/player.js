@@ -1,5 +1,3 @@
-import { createPlayer } from "../service/playerController.js";
-
 export class Player {
     constructor(name) {
         this.name = name;
