@@ -5,6 +5,5 @@ export async function readAllRiddles() {
         console.log(riddles);
     }catch(err){
         console.log("Error: ", err.message);
-        
     }
 }
