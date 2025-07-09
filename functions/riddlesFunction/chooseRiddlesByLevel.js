@@ -1,10 +1,29 @@
-import { getRiddlesByLevel } from "../../../server/controllers/riddleController.js";
+import { MultipleChoiceRiddle } from "../../models/MultipleChoiceRiddle.js";
+import { Riddle } from "../../models/riddle.js";
 import readline from 'readline-sync';
 
-export async function chooseRiddlesByLevel(){
-    const level = chooseLevel();
-    const allRiddlesByLevel = await getRiddlesByLevel(level);
-    return allRiddlesByLevel;
+export async function chooseRiddlesByLevel() {
+    try {
+        const level = chooseLevel();
+        const allDataByLevel = await fetch(`http://localhost:3000/riddleByLevel/${level}`).then((res) => res.json());
+
+        const riddlesByLevel = [];
+        let id = 1;
+        for (const dataByLevel of allDataByLevel) {
+            if (dataByLevel.choices) {
+                const newRiddle = new MultipleChoiceRiddle(id, dataByLevel.name, dataByLevel.taskDescription, dataByLevel.correctAnswer, dataByLevel.difficulty, dataByLevel.choices, dataByLevel.hint, dataByLevel.timeLimit);
+                riddlesByLevel.push(newRiddle);
+            } else {
+                const newRiddle = new Riddle(id, dataByLevel.name, dataByLevel.taskDescription, dataByLevel.correctAnswer, dataByLevel.difficulty, dataByLevel.hint, dataByLevel.timeLimit);
+                riddlesByLevel.push(newRiddle);
+            }
+            id++;
+        }
+        return riddlesByLevel;
+    } catch(err){
+        console.log("Error: ", err.message);
+        
+    }
 }
 
 function chooseLevel() {

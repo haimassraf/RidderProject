@@ -5,13 +5,9 @@ import { readAllRiddles } from "./functions/riddlesFunction/readAllRiddles.js";
 import { updateRiddle } from './functions/riddlesFunction/updateRiddle.js';
 import { deleteRiddle } from './functions/riddlesFunction/deleteRiddle.js';
 import { viewLeaderBoard } from './functions/playerFunction/viewLeaderBoard.js';
-import fetch from 'node-fetch'
 
 async function main() {
     console.log('=== Welcome to Riddle Project! ===');
-
-    // let ifExit = false;
-    // while (!ifExit) {
     menu();
     const userChoice = readline.question();
     switch (userChoice) {
@@ -33,15 +29,11 @@ async function main() {
         case "6":
             viewLeaderBoard();
             break;
-        // case "7":
-        //     ifExit = true;
-        //     break;
         default:
             console.log("Invalid choice");
             break;
     }
 }
-// }
 
 function menu() {
     console.log("\t1.play the game");
