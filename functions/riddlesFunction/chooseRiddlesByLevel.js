@@ -1,29 +1,24 @@
 import { MultipleChoiceRiddle } from "../../models/MultipleChoiceRiddle.js";
 import { Riddle } from "../../models/riddle.js";
 import readline from 'readline-sync';
+import { makeRequest } from "../makeRequest.js";
 
 export async function chooseRiddlesByLevel() {
-    try {
-        const level = chooseLevel();
-        const allDataByLevel = await fetch(`http://localhost:3000/riddleByLevel/${level}`).then((res) => res.json());
-
-        const riddlesByLevel = [];
-        let id = 1;
-        for (const dataByLevel of allDataByLevel) {
-            if (dataByLevel.choices) {
-                const newRiddle = new MultipleChoiceRiddle(id, dataByLevel.name, dataByLevel.taskDescription, dataByLevel.correctAnswer, dataByLevel.difficulty, dataByLevel.choices, dataByLevel.hint, dataByLevel.timeLimit);
-                riddlesByLevel.push(newRiddle);
-            } else {
-                const newRiddle = new Riddle(id, dataByLevel.name, dataByLevel.taskDescription, dataByLevel.correctAnswer, dataByLevel.difficulty, dataByLevel.hint, dataByLevel.timeLimit);
-                riddlesByLevel.push(newRiddle);
-            }
-            id++;
+    const level = chooseLevel();
+    const allDataByLevel = await makeRequest(`/riddleByLevel/${level}`, 'GET');
+    const riddlesByLevel = [];
+    let id = 1;
+    for (const dataByLevel of allDataByLevel) {
+        if (dataByLevel.choices) {
+            const newRiddle = new MultipleChoiceRiddle(id, dataByLevel.name, dataByLevel.taskDescription, dataByLevel.correctAnswer, dataByLevel.difficulty, dataByLevel.choices, dataByLevel.hint, dataByLevel.timeLimit);
+            riddlesByLevel.push(newRiddle);
+        } else {
+            const newRiddle = new Riddle(id, dataByLevel.name, dataByLevel.taskDescription, dataByLevel.correctAnswer, dataByLevel.difficulty, dataByLevel.hint, dataByLevel.timeLimit);
+            riddlesByLevel.push(newRiddle);
         }
-        return riddlesByLevel;
-    } catch(err){
-        console.log("Error: ", err.message);
-        
+        id++;
     }
+    return riddlesByLevel;
 }
 
 function chooseLevel() {

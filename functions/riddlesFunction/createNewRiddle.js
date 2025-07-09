@@ -1,37 +1,28 @@
 import readline from 'readline-sync';
+import { makeRequest } from '../makeRequest.js';
 
 export async function createNewRiddle() {
-    try {
-        const newRiddle = {
-        }
-
-        newRiddle.name = requiredQuestion("Name: ")
-        newRiddle.taskDescription = requiredQuestion("Task description: ");
-        const isMultiple = readline.question("Multiple choices? (y) ").toLowerCase();
-        if (isMultiple === 'y') {
-            newRiddle.choices = addMultipleAnswer();
-            newRiddle.correctAnswer = requiredQuestion("correct answer (1-4): ", false, true);
-        }
-        else {
-            newRiddle.correctAnswer = requiredQuestion("correct Answer: ")
-        }
-        newRiddle.difficulty = requiredQuestion("difficulty (easy, medium, hard): ", true);
-        newRiddle.hint = readline.question("Hint (or enter if not): ");
-        const isTimeLimit = readline.question("Time Limit? (y) ").toLowerCase();
-        if (isTimeLimit === 'y') {
-            newRiddle.timeLimit = requiredQuestion("Time Limit: ", false, false, true);
-        }
-        const res =  await fetch("http://localhost:3000/riddle", {
-            method: 'POST',
-            headers: {
-                "content-type": "application/json"
-            },
-            body: JSON.stringify(newRiddle)
-        }).then((res) => res.json())
-        console.log(res)
-    } catch (err) {
-        console.log("Error: ", err);
+    const newRiddle = {
     }
+
+    newRiddle.name = requiredQuestion("Name: ")
+    newRiddle.taskDescription = requiredQuestion("Task description: ");
+    const isMultiple = readline.question("Multiple choices? (y) ").toLowerCase();
+    if (isMultiple === 'y') {
+        newRiddle.choices = addMultipleAnswer();
+        newRiddle.correctAnswer = requiredQuestion("correct answer (1-4): ", false, true);
+    }
+    else {
+        newRiddle.correctAnswer = requiredQuestion("correct Answer: ")
+    }
+    newRiddle.difficulty = requiredQuestion("difficulty (easy, medium, hard): ", true);
+    newRiddle.hint = readline.question("Hint (or enter if not): ");
+    const isTimeLimit = readline.question("Time Limit? (y) ").toLowerCase();
+    if (isTimeLimit === 'y') {
+        newRiddle.timeLimit = requiredQuestion("Time Limit: ", false, false, true);
+    }
+    const res = await makeRequest('/riddle', 'POST', newRiddle);
+    console.log(res);
 }
 
 function requiredQuestion(question, isDifficulty = false, isMultiple = false, timeLimit = false) {

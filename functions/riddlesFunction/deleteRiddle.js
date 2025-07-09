@@ -1,7 +1,7 @@
-import { deleteById } from "../../../server/controllers/riddleController.js";
 import readline from 'readline-sync';
+import { makeRequest } from '../makeRequest.js';
 
-export function deleteRiddle() {
+export async function deleteRiddle() {
     let idForDelete;
     let userChoice;
     do {
@@ -9,6 +9,6 @@ export function deleteRiddle() {
         idForDelete = parseInt(userChoice);
         if (isNaN(idForDelete)) { console.log("The id is number") };
     } while (isNaN(idForDelete));
-
-    deleteById(idForDelete);
+    const res = await makeRequest(`/riddle/${idForDelete}`, 'DELETE');
+    console.log(res)
 }
