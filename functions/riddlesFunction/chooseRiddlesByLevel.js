@@ -5,7 +5,7 @@ import { makeRequest } from "../makeRequest.js";
 
 export async function chooseRiddlesByLevel() {
     const level = chooseLevel();
-    const allDataByLevel = await makeRequest(`/riddleByLevel/${level}`, 'GET');
+    const allDataByLevel = await makeRequest(`/riddle/riddleByLevel/${level}`, 'GET');
     const riddlesByLevel = [];
     let id = 1;
     for (const dataByLevel of allDataByLevel) {

@@ -12,7 +12,7 @@ async function main() {
     const userChoice = readline.question();
     switch (userChoice) {
         case "1":
-            await startGame();
+            startGame();
             break;
         case "2":
             createNewRiddle();

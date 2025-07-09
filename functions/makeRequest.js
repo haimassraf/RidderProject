@@ -11,7 +11,7 @@ export async function makeRequest(url, method, body = null) {
             options.body = JSON.stringify(body);
         }
 
-        const res = await fetch(`https://riddleprojectserver.onrender.com${url}`, options);
+        const res = await fetch(`http://localhost:3000${url}`, options);
 
         if (!res.ok) {
             throw new Error(`HTTP error! status: ${res.status}`);
