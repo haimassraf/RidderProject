@@ -1,4 +1,4 @@
-export async function makeRequest(url, method, body = null) {
+export async function makeRequest(url, method = 'GET', body = null) {
     try {
         const options = {
             method: method,
@@ -17,7 +17,14 @@ export async function makeRequest(url, method, body = null) {
             throw new Error(`HTTP error! status: ${res.status}`);
         }
 
-        return await res.json();
+        const contentType = res.headers.get('Content-Type');
+
+        if (contentType && contentType.includes('application/json')) {
+            return await res.json();
+        } else {
+            return await res.text();
+        }
+
     } catch (err) {
         console.error('Request error:', err.message);
         return null;

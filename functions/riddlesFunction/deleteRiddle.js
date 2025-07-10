@@ -7,7 +7,7 @@ export async function deleteRiddle() {
     do {
         userChoice = readline.question("Enter the object id for delete: ")
         idForDelete = parseInt(userChoice);
-        if (isNaN(idForDelete)) { console.log("The id is number") };
+        if (isNaN(idForDelete)) { console.log("The id is required and number") };
     } while (isNaN(idForDelete));
     const res = await makeRequest(`/riddle/${idForDelete}`, 'DELETE');
     console.log(res)

@@ -1,5 +1,6 @@
 import readline from 'readline-sync';
 import { makeRequest } from '../makeRequest.js';
+import { addMultipleAnswer, requiredQuestion } from '../globalFunction.js';
 
 export async function updateRiddle() {
     let idForUpdate;
@@ -7,7 +8,7 @@ export async function updateRiddle() {
     do {
         userChoice = readline.question("Enter the object id for update: ")
         idForUpdate = parseInt(userChoice);
-        if (isNaN(idForUpdate)) { console.log("The id is number") };
+        if (isNaN(idForUpdate)) { console.log("The id is required and number") };
     } while (isNaN(idForUpdate));
 
     const updatedRiddle = {};
@@ -50,50 +51,4 @@ export async function updateRiddle() {
     }
     const res = await makeRequest(`/riddle/${idForUpdate}`, "PUT", updatedRiddle)
     console.log(res)
-}
-
-function requiredQuestion(question, isDifficulty = false, isMultiple = false, timeLimit = false) {
-    let res;
-    do {
-        res = readline.question(`\n${question}`);
-
-        if (!isDifficulty && !isMultiple && !timeLimit) {
-            if (!res) {
-                console.log("You must enter this line");
-            }
-        } else if (isDifficulty) {
-            const levels = ["easy", "medium", "hard"];
-            if (!levels.includes(res.toLowerCase())) {
-                console.log("Difficulty must be one of: easy, medium, hard");
-                res = "";
-            }
-        }
-        else if (isMultiple) {
-            const num = parseInt(res);
-            if (isNaN(num) || num < 1 || num > 4) {
-                console.log("Answer must be a number between 1 to 4.");
-                res = "";
-            }
-        }
-        else if (timeLimit) {
-            const num = parseInt(res);
-            if (isNaN(num) || num < 1 || num > 60) {
-                console.log("You must enter a positive number that lower than 60");
-                res = "";
-            }
-            else {
-                res = num;
-            }
-        }
-    } while (!res)
-    return res;
-}
-
-function addMultipleAnswer() {
-    const answers = [];
-    for (let i = 0; i < 4; i++) {
-        const answer = requiredQuestion(`Enter ${i + 1} answer: `);
-        answers.push(answer);
-    }
-    return answers;
 }
