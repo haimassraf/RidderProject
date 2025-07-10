@@ -20,7 +20,7 @@ export async function startGame() {
     }
     if (!isFound) {
         console.log("Player not found")
-        const create = readline.question("Do you want to create a new player with the inserted name (Y) ?").toLowerCase();
+        const create = readline.question("Do you want to create a new player with the inserted name (Y) ? ").toLowerCase();
         if (create === 'y') {
             console.log("Creating a New Player...");
             currentPlayer = createPlayer(playerName);

@@ -24,10 +24,10 @@ export class Player {
     async IsUpdateHighScore() {
         const totalTime = this.times.reduce((acc, curr) => acc + curr, 0).toFixed(2);
         if (totalTime < this.highScore) {
-            console.log(`New high score: ${totalTime}!`);
+            console.log(`New high score: ${totalTime} :)`);
             updateHighScore(totalTime, this.id);
         } else {
-            console.log(`Yout current high score is ${this.highScore}`);
+            console.log(`Yout current high score is ${this.highScore} secound`);
         }
     }
 }
