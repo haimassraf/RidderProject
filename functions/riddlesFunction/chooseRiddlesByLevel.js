@@ -3,7 +3,7 @@ import { Riddle } from "../../models/riddle.js";
 import readline from 'readline-sync';
 import { makeRequest } from "../makeRequest.js";
 
-export async function chooseRiddlesByLevel() {
+export async function chooseAndGetRiddlesByLevel() {
     const level = chooseLevel();
     const allDataByLevel = await makeRequest(`/riddle/riddleByLevel/${level}`, 'GET');
     const riddlesByLevel = [];

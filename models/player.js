@@ -21,7 +21,7 @@ export class Player {
         console.log(`\tAVG per riddle ${avgTime.toFixed(2)} secound`);
     }
 
-    async isUpdateHighScore() {
+    async IsUpdateHighScore() {
         const totalTime = this.times.reduce((acc, curr) => acc + curr, 0).toFixed(2);
         if (totalTime < this.highScore) {
             console.log(`New high score: ${totalTime}!`);

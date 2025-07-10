@@ -1,10 +1,13 @@
 import { getAllPlayers } from "./getAllPlayers.js";
-import { getPlayerByName } from "./getPlayerById.js";
-import { updateHighScore } from "./updateHighScore.js";
 
 export async function viewLeaderBoard() {
-   const play = await getPlayerByName('haim')
-   console.log(play);
-   
+   const allPlayers = await getAllPlayers();
+   allPlayers.sort((a, b) => a.highScore - b.highScore);
+   console.log("\t=== Leader Board ===");
+   for(let i = 0; i < allPlayers.length; i ++){
+      const currentPlayer = allPlayers[i];
+      console.log(`${i + 1}. Player '${currentPlayer.name}' with ${currentPlayer.highScore} secound`)
+   }
+   console.table(allPlayers, ['name', 'highScore', 'id']);
    
 }
