@@ -16,17 +16,17 @@ export class Riddle {
     ask() {
         console.log(`\nRiddle ${this.id}: ${this.name}`);
         this.start = Date.now();
-        let isHint = false;
+        let usedHint = false;
         let answer;
 
         do {
-            let question = this.taskDescription;
-            question += !isHint ? " (You can enter 'hint' but its coust 10 secounds) " : " ";
+            let question = `\t${this.taskDescription}`;
+            question += !usedHint ? " (You can enter 'hint' but its coust 10 secounds)\n\t" : "\n\t";
             answer = readline.question(question).toLowerCase();
             if (answer === "hint") {
-                if (!isHint) {
+                if (!usedHint) {
                     if (this.hint) {
-                        isHint = true;
+                        usedHint = true;
                         console.log(`Hint: ${this.hint}`);
                         this.start -= 10000;
                     }
@@ -39,16 +39,17 @@ export class Riddle {
                 }
             }
             else if (answer !== this.correctAnswer) {
-                console.log("Wrong answer, please try again");
+                console.log("Wrong Answer, 1 secound penalty applied");
+                this.start -= 1000;
             }
         } while (answer !== this.correctAnswer);
 
         this.end = Date.now();
-        console.log('correct!');
+        console.log('Correct Answer');
 
-        if (!isHint && (this.end - this.start) / 1000 > this.timeLimit) {
-            console.log("Too slow! 5 seconds penalty applied.");
-            this.start -= 5000;
+        if (!usedHint && (this.end - this.start) / 1000 > this.timeLimit) {
+            console.log("Too slow! 2 seconds penalty applied.");
+            this.start -= 2000;
         }
     }
 }

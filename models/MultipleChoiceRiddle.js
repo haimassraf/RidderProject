@@ -16,14 +16,15 @@ export class MultipleChoiceRiddle extends Riddle {
 
         do {
             console.log(this.taskDescription);
-            console.log('choose one of the options (1-4):');
+            console.log(`choose one of the options (1-${this.choices.length}):`);
             for (let i = 0; i < this.choices.length; i++) {
                 console.log(`\t${i + 1}: ${this.choices[i]}`);
             }
-            
-            answer = readline.question();
+
+            answer = readline.question('\t');
             if (answer !== this.correctAnswer) {
-                console.log("Wrong answer, please try again");
+                console.log("Wrong Answer, 1 secound penalty applied");
+                this.start -= 1000;
             }
         } while (answer !== this.correctAnswer);
 
@@ -31,8 +32,8 @@ export class MultipleChoiceRiddle extends Riddle {
         console.log('correct!');
 
         if ((this.end - this.start) / 1000 > this.timeLimit) {
-            console.log("Too slow! 5 seconds penalty applied.");
-            this.start -= 5000;
+            console.log("Too slow! 2 seconds penalty applied");
+            this.start -= 2000;
         }
     }
 }

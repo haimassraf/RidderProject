@@ -1,5 +1,5 @@
 import readline from 'readline-sync';
-import { chooseAndGetRiddlesByLevel } from "./functions/riddlesFunction/chooseRiddlesByLevel.js";
+import { chooseAndGetRiddlesByLevel } from "./functions/riddlesFunction/chooseAndGetRiddlesByLevel.js";
 import { getAllPlayers } from "./functions/playerFunction/getAllPlayers.js";
 import { createPlayer } from "./functions/playerFunction/createPlayer.js";
 
@@ -34,7 +34,7 @@ export async function startGame() {
             riddle.ask();
             currentPlayer.RecordTime(riddle.start, riddle.end);
         }
-        currentPlayer.IsUpdateHighScore();
+        currentPlayer.HighScoreRendel();
         currentPlayer.ShowStatus();
     }
     console.log("Have a Nice Day.")

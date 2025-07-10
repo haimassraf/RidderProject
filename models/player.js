@@ -1,4 +1,4 @@
-import { updateHighScore } from "../functions/playerFunction/updateHighScore.js";
+import { updateOrInsertHighScore } from "../functions/playerFunction/updateOrInsertHighScore.js";
 
 export class Player {
     constructor(id, name, highScore = undefined) {
@@ -12,6 +12,18 @@ export class Player {
         this.times.push(time);
     }
 
+    async HighScoreRendel() {
+        const totalTime = this.times.reduce((acc, curr) => acc + curr, 0).toFixed(2);
+        if (this.highScore && totalTime < this.highScore) {
+            console.log(`*** New high score: ${totalTime} secound! ***`);
+            updateOrInsertHighScore(totalTime, this.id);
+        } else if (this.highScore) {
+            console.log(`Yout current high score is ${this.highScore} secound`);
+        } else {
+            updateOrInsertHighScore(totalTime, this.id)
+        }
+    }
+
     ShowStatus() {
         const totalTime = this.times.reduce((acc, curr) => acc + curr, 0);
         const avgTime = totalTime / this.times.length;
@@ -19,15 +31,5 @@ export class Player {
         console.log(`${this.name}\`s record:`);
         console.log(`\tTotal time: ${totalTime.toFixed(2)} secound`);
         console.log(`\tAVG per riddle ${avgTime.toFixed(2)} secound`);
-    }
-
-    async IsUpdateHighScore() {
-        const totalTime = this.times.reduce((acc, curr) => acc + curr, 0).toFixed(2);
-        if (totalTime < this.highScore) {
-            console.log(`New high score: ${totalTime} :)`);
-            updateHighScore(totalTime, this.id);
-        } else {
-            console.log(`Yout current high score is ${this.highScore} secound`);
-        }
     }
 }
