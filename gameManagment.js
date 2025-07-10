@@ -23,7 +23,7 @@ export async function startGame() {
         const create = readline.question("Do you want to create a new player with the inserted name (Y) ? ").toLowerCase();
         if (create === 'y') {
             console.log("Creating a New Player...");
-            currentPlayer = createPlayer(playerName);
+            currentPlayer = await createPlayer(playerName);
         } else {
             isPlay = false;
         }
