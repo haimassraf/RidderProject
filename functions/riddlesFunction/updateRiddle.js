@@ -3,13 +3,8 @@ import { makeRequest } from '../makeRequest.js';
 import { addMultipleAnswer, requiredQuestion } from '../globalFunction.js';
 
 export async function updateRiddle() {
-    let idForUpdate;
-    let userChoice;
-    do {
-        userChoice = readline.question("Enter the object id for update: ")
-        idForUpdate = parseInt(userChoice);
-        if (isNaN(idForUpdate)) { console.log("The id is required and number") };
-    } while (isNaN(idForUpdate));
+
+    const idForUpdate = readline.question("Enter the object id for update: ")
 
     const updatedRiddle = {};
 
