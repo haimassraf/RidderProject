@@ -17,15 +17,16 @@ export async function viewLeaderBoard() {
          return aScore - bScore;
       });
 
-      console.log("\t=== Leader Board ===");
-      for (let i = 0; i < allPlayers.length; i++) {
-         const currentPlayer = allPlayers[i];
-         const score = currentPlayer.highScore !== undefined && currentPlayer.highScore !== null
-            ? `with ${currentPlayer.highScore} seconds`
-            : "NOT PLAYED";
-         console.log(`${i + 1}. Player '${currentPlayer.name}' ${score}`);
-      }
-   }catch(err){
-      console.log("Error to view leader board: ", err.message)
+      const tableData = allPlayers.map((player) => ({
+         Name: player.name,
+         Score: player.highScore !== undefined && player.highScore !== null
+            ? `${player.highScore} seconds`
+            : 'NOT PLAYED'
+      }));
+
+      console.log("\n=== Leader Board ===");
+      console.table(tableData);
+   } catch (err) {
+      console.log("Error to view leader board: ", err.message);
    }
 }

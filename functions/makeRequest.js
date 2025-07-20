@@ -10,7 +10,7 @@ export async function makeRequest(url, method = 'GET', body = null) {
         if (body) {
             options.body = JSON.stringify(body);
         }
-
+        await new Promise(resolve => setTimeout(resolve, 1000))
         const res = await fetch(`http://localhost:3000${url}`, options);
 
         if (!res.ok) {

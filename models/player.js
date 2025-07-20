@@ -15,12 +15,12 @@ export class Player {
     async HighScoreRendel() {
         const totalTime = this.times.reduce((acc, curr) => acc + curr, 0).toFixed(2);
         if (this.highScore && totalTime < this.highScore) {
-            console.log(`\n\n*** New high score: ${totalTime} secound! ***`);
-            updateOrInsertHighScore(totalTime, this.id);
+            console.log(`\n\n***** New high score: '${totalTime}' secound! *****`);
+            await updateOrInsertHighScore(totalTime, this.id);
         } else if (this.highScore) {
-            console.log(`\n\nYout current high score is ${this.highScore} secound`);
+            console.log(`\n\nYour current high score is '${this.highScore}' secound`);
         } else {
-            updateOrInsertHighScore(totalTime, this.id)
+            await updateOrInsertHighScore(totalTime, this.id)
         }
     }
 

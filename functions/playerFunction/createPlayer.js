@@ -8,7 +8,6 @@ export async function createPlayer(newName = null) {
     }
     const body = { name: newName }
     const res = await makeRequest('/player', 'POST', body)
-    console.log(res)
     const newPlayer = new Player(res.id, res.name)
     return newPlayer;
 }
