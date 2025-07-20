@@ -22,5 +22,6 @@ export async function createNewRiddle() {
         newRiddle.timeLimit = requiredQuestion("Time Limit: ", false, false, true);
     }
     const res = await makeRequest('/riddle', 'POST', newRiddle);
+    console.log(newRiddle)
     console.log(res);
 }

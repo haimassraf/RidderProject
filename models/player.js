@@ -18,7 +18,7 @@ export class Player {
             console.log(`\n\n*** New high score: ${totalTime} secound! ***`);
             updateOrInsertHighScore(totalTime, this.id);
         } else if (this.highScore) {
-            console.log(`Yout current high score is ${this.highScore} secound`);
+            console.log(`\n\nYout current high score is ${this.highScore} secound`);
         } else {
             updateOrInsertHighScore(totalTime, this.id)
         }
