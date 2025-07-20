@@ -6,7 +6,7 @@ export async function getAllPlayers() {
         const players = [];
         const data = await makeRequest('/player', 'GET');
         for (const obj of data) {
-            const newPlayer = new Player(obj.id, obj.name, obj.highScore);
+            const newPlayer = new Player(obj.id, obj.name, obj.high_score);
             players.push(newPlayer);
         }
         return players;

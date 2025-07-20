@@ -15,7 +15,7 @@ export class Player {
     async HighScoreRendel() {
         const totalTime = this.times.reduce((acc, curr) => acc + curr, 0).toFixed(2);
         if (this.highScore && totalTime < this.highScore) {
-            console.log(`*** New high score: ${totalTime} secound! ***`);
+            console.log(`\n\n*** New high score: ${totalTime} secound! ***`);
             updateOrInsertHighScore(totalTime, this.id);
         } else if (this.highScore) {
             console.log(`Yout current high score is ${this.highScore} secound`);
@@ -28,7 +28,7 @@ export class Player {
         const totalTime = this.times.reduce((acc, curr) => acc + curr, 0);
         const avgTime = totalTime / this.times.length;
 
-        console.log(`${this.name}\`s record:`);
+        console.log(`\n${this.name}\`s record:`);
         console.log(`\tTotal time: ${totalTime.toFixed(2)} secound`);
         console.log(`\tAVG per riddle ${avgTime.toFixed(2)} secound`);
     }
