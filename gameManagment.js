@@ -18,7 +18,7 @@ export async function startGame() {
         }
     }
     else {
-        console.log(`Welcome Back '${currentPlayer.name}'\nYou current high score is: '${currentPlayer.highScore}'`)
+        console.log(`Welcome Back '${currentPlayer.name}'\nYour current high score is: '${currentPlayer.highScore}'`)
     }
     if (isPlay) {
         const allRiddles = await chooseAndGetRiddlesByLevel();
