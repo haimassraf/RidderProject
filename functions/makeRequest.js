@@ -26,7 +26,7 @@ export async function makeRequest(url, method = 'GET', body = null) {
         }
 
     } catch (err) {
-        console.error('Request error:', err.message);
+        console.error('Error in make request:', err.message);
         return null;
     }
 }
