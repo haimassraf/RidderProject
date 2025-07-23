@@ -1,39 +1,36 @@
-import readline from 'readline-sync';
 import { chooseAndGetRiddlesByLevel } from "./functions/riddlesFunction/chooseAndGetRiddlesByLevel.js";
-import { createPlayer } from "./functions/playerFunction/createPlayer.js";
-import { getPlayerByName } from './functions/playerFunction/getPlayerByName.js';
+import { Player } from './models/player.js';
+import { getToken } from './functions/auth/authToken.js';
+import jwt from 'jsonwebtoken';
+import { getPlayerById } from './functions/playerFunction/getPlayerById.js';
 
 
-export async function startGame() {
+export async function startGame(guest = false) {
     try {
-        let play = true;
-        const playerName = readline.question("Enter your name: ");
-        let currentPlayer = await getPlayerByName(playerName);
-        if (!currentPlayer) {
-            const create = readline.question("Do you want to create a new player with the inserted name (Y) ? ").toLowerCase();
-            if (create === 'y') {
-                console.log("Creating a New Player...");
-                currentPlayer = await createPlayer(playerName);
-            } else {
-                play = false;
+        let currentPlayer;
+        if (!guest) {
+            const token = getToken();
+            const payload = jwt.decode(token);
+            if (!payload || !payload.id) {
+                console.log("Token is missing ID");
+                return null;
             }
+            currentPlayer = await getPlayerById(payload.id);
+            console.log(`Welcome Back '${currentPlayer.name}'\nYour current high score is: '${currentPlayer.highScore || 'Not Play'}'`)
+        } else {
+            currentPlayer = new Player(0, 'Guest')
+        }
+        const allRiddles = await chooseAndGetRiddlesByLevel();
+        if (allRiddles.length > 0) {
+            for (const riddle of allRiddles) {
+                await riddle.ask();
+                currentPlayer.RecordTime(riddle.start, riddle.end);
+            }
+            if (!guest) await currentPlayer.HighScoreRendel();
+            currentPlayer.ShowStatus();
         }
         else {
-            console.log(`Welcome Back '${currentPlayer.name}'\nYour current high score is: '${currentPlayer.highScore}'`)
-        }
-        if (play) {
-            const allRiddles = await chooseAndGetRiddlesByLevel();
-            if (allRiddles.length > 0) {
-                for (const riddle of allRiddles) {
-                    riddle.ask();
-                    currentPlayer.RecordTime(riddle.start, riddle.end);
-                }
-                await currentPlayer.HighScoreRendel();
-                currentPlayer.ShowStatus();
-            }
-            else {
-                console.log("Problem with get riddles")
-            }
+            console.log("Problem with get riddles")
         }
         console.log("Have a Nice Day.")
     } catch (err) {

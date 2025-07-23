@@ -19,6 +19,7 @@
   "homepage": "https://github.com/haimassraf/RidderProject#readme",
   "description": "",
   "dependencies": {
+    "jsonwebtoken": "^9.0.2",
     "node-fetch": "^3.3.2",
     "readline-sync": "^1.4.10"
   }

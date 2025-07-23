@@ -1,3 +1,5 @@
+import { clearToken, getToken, setToken } from "./auth/authToken.js";
+
 export async function makeRequest(url, method = 'GET', body = null) {
     try {
         const options = {
@@ -7,14 +9,24 @@ export async function makeRequest(url, method = 'GET', body = null) {
             },
         };
 
+        const token = getToken();
+        if (token) { options.headers['Authorization'] = `Bearer ${token}` };
+
         if (body) {
             options.body = JSON.stringify(body);
         }
         await new Promise(resolve => setTimeout(resolve, 1000))
+
         const res = await fetch(`http://localhost:3000${url}`, options);
 
+        if(res.status === 401){
+            console.log('Token expired of invalid. Please login again.')
+            clearToken();
+            return null;
+        }
         if (!res.ok) {
-            throw new Error(`HTTP error! status: ${res.status}`);
+            const errText = await res.text();
+            throw new Error(errText);
         }
 
         const contentType = res.headers.get('Content-Type');

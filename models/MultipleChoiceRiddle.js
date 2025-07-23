@@ -9,13 +9,14 @@ export class MultipleChoiceRiddle extends Riddle {
         this.end = null;
     }
 
-    ask() {
+    async ask() {
         console.log(`\nRiddle ${this.id}: ${this.name}`);
         this.start = Date.now();
         let answer;
 
         do {
             console.log(this.taskDescription);
+            await new Promise(resolve => setTimeout(resolve, 300))
             console.log(`choose one of the options (1-${this.choices.length}):`);
             for (let i = 0; i < this.choices.length; i++) {
                 console.log(`\t${i + 1}: ${this.choices[i]}`);

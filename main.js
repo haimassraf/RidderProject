@@ -1,7 +1,9 @@
 import readline from 'readline-sync';
 import { startGame } from './gameManagment.js';
-import { viewLeaderBoard } from './functions/playerFunction/viewLeaderBoard.js';
-import { handlePlayerMenu, handleRiddleMenu } from './handelsMenu.js';
+import { login } from './functions/auth/login.js';
+import { signup } from './functions/auth/signup.js';
+import { getToken } from './functions/auth/authToken.js';
+import { handelsMenu } from './handelsMenu.js';
 
 async function main() {
     console.log('===== Welcome to Riddle Project! =====');
@@ -9,23 +11,23 @@ async function main() {
     let exit = false;
 
     while (!exit) {
+        if (getToken()) {
+            await handelsMenu();
+        }
         menu();
         const userChoice = readline.question('Enter your choice: ');
 
         switch (userChoice) {
             case "1":
-                await startGame();
+                await startGame(true);
                 break;
             case "2":
-                await viewLeaderBoard();
+                await login();
                 break;
             case "3":
-                await handleRiddleMenu();
+                await signup();
                 break;
             case "4":
-                await handlePlayerMenu();
-                break;
-            case "5":
                 console.log("Goodbye!");
                 exit = true;
                 break;
@@ -38,11 +40,10 @@ async function main() {
 
 function menu() {
     console.log("\n===== Menu =====");
-    console.log("\t1. Play the game");
-    console.log("\t2. View leaderboard");
-    console.log("\t3. Riddles settings");
-    console.log("\t4. Players settings");
-    console.log("\t5. Exit");
+    console.log("\t1. Play as a guest");
+    console.log("\t2. login");
+    console.log("\t3. signup");
+    console.log("\t4. Exit");
 }
 
 main();

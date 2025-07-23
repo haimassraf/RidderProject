@@ -13,7 +13,7 @@ export class Riddle {
         this.end = null;
     }
 
-    ask() {
+    async ask() {
         console.log(`\nRiddle ${this.id}: ${this.name}`);
         this.start = Date.now();
         let usedHint = false;
@@ -22,6 +22,7 @@ export class Riddle {
         do {
             let question = `\t${this.taskDescription}`;
             question += !usedHint ? " (You can enter 'hint' but its coust 10 secounds)\n\t" : "\n\t";
+            await new Promise(resolve => setTimeout(resolve, 300))
             answer = readline.question(question).toLowerCase();
             if (answer === "hint") {
                 if (!usedHint) {

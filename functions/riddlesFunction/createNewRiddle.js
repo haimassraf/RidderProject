@@ -1,6 +1,6 @@
 import readline from 'readline-sync';
 import { makeRequest } from '../makeRequest.js';
-import { addMultipleAnswer, requiredQuestion } from './globalFunction.js';
+import { addMultipleAnswer, requiredQuestion } from '../globalFunction.js';
 
 export async function createNewRiddle() {
     const newRiddle = {}
