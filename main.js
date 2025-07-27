@@ -4,6 +4,7 @@ import { login } from './functions/auth/login.js';
 import { signup } from './functions/auth/signup.js';
 import { getToken } from './functions/auth/authToken.js';
 import { handelsMenu } from './handelsMenu.js';
+import jwt from 'jsonwebtoken';
 
 async function main() {
     console.log('===== Welcome to Riddle Project! =====');
@@ -11,7 +12,7 @@ async function main() {
     let exit = false;
 
     while (!exit) {
-        if (getToken()) {
+        if (getToken() && jwt.decode(getToken()).id) {
             await handelsMenu();
         }
         menu();

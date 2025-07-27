@@ -24,3 +24,4 @@ export function clearToken(){
     token = null;
     if (fs.existsSync(tokenFile)) fs.unlinkSync(tokenFile);
 }
+
