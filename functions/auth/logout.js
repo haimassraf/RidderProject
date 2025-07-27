@@ -3,8 +3,8 @@ import { makeRequest } from "../makeRequest.js";
 
 export async function logout() {
     try {
-        const msg = await makeRequest('/auth/logout', 'GET');
+        const res = await makeRequest('/auth/logout', 'GET');
         clearToken();
-        console.log(msg);
+        if (res) console.log(res);
     } catch (err) { console.log("Error: ", err.message) }
 }

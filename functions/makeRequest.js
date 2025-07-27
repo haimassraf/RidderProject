@@ -1,4 +1,4 @@
-import { clearToken, getToken, setToken } from "./auth/authToken.js";
+import { clearToken, getToken } from "./auth/authToken.js";
 
 export async function makeRequest(url, method = 'GET', body = null) {
     try {

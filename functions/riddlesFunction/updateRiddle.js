@@ -45,5 +45,5 @@ export async function updateRiddle() {
         updatedRiddle.timeLimit = requiredQuestion("New time limit (1 - 60): ", false, false, true);
     }
     const res = await makeRequest(`/riddle/${idForUpdate}`, "PUT", updatedRiddle)
-    console.log(res)
+    if (res) console.log(res)
 }

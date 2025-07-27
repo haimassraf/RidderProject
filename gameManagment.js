@@ -12,13 +12,13 @@ export async function startGame(guest = false) {
             const token = getToken();
             const payload = jwt.decode(token);
             if (!payload || !payload.id) {
-                console.log("Token is missing ID");
+                console.log("Please login again");
                 return null;
             }
             currentPlayer = await getPlayerById(payload.id);
             console.log(`Welcome Back '${currentPlayer.name}'\nYour current high score is: '${currentPlayer.highScore || 'Not Play'}'`)
         } else {
-            currentPlayer = new Player(0, 'Guest')
+            currentPlayer = new Player(0, 'Guest');
         }
         const allRiddles = await chooseAndGetRiddlesByLevel();
         if (allRiddles.length > 0) {
